@@ -1,0 +1,6 @@
+sum_list = {list | 
+    true? list.empty?, 0, {
+        sum_list(list.rest) + list.first}
+        }
+
+p sum_list [1 2 3]

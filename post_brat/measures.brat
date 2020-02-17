@@ -1,0 +1,46 @@
+
+mean = { list |
+    true? list.empty?, 0, { list.reduce(0, :+) / list.length }
+    }
+
+geom_mean = { list |
+    true? list.empty?, 0, { list.reduce(1, :*) ^ (1 / list.length)}
+    }
+
+median = {list |
+    true? list.empty?, 0, {(list.sort[((1 - list.length) / 2).to_i] + list.sort[(list.length / 2).to_i]) * 0.5}
+}
+
+mode = {list | 
+
+    count = [:]
+    list.each({i | count[i] = 0})
+    list.each({i | count[i] = count[i] + 1})
+
+    max_so_far = 0
+    true_mode = 0
+    
+    count.each_key({i | 
+        true? count[i] > max_so_far 
+        {max_so_far = count[i]
+        true_mode = i}
+    {}})
+true_mode
+}
+
+measure_all = {list | 
+
+p "mean: " mean list
+p "median: " median list
+p "mode: " mode list
+p "geom_mean: " geom_mean list
+""
+}
+
+# measure_all[13, 18, 13, 14, 13, 16, 14, 21, 13]
+
+export ->mode, "mode"
+export ->mean, "mean"
+export ->median, "median"
+export ->geom_mean, "geom_mean"
+export ->measure_all, "measure_all"

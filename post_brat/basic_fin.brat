@@ -1,0 +1,27 @@
+include :file
+include :measures #file with my defined mean, median, mode, geom mean, etc
+
+csv = new
+csv.rows = []
+
+file.each_line "01-amazon.csv" {line | csv.rows << line.split(",")}
+
+debt_lt = []
+revenue = []
+mkt_cap = []
+scores = []
+csv.rows[1, -1].each({list | debt_lt << list[3].to_f revenue << list[5].to_f mkt_cap << list[-1].to_f})
+csv.rows[1, -1].each({list | scores << ((geom_mean [list[3].to_f list[5].to_f]) / list[-1].to_f) })
+
+
+p "long term debt"
+p measure_all debt_lt
+p "revenue"
+p measure_all revenue
+p "long term debt and revenue"
+p measure_all (debt_lt + revenue)
+
+p ((geom_mean (debt_lt + revenue)) / mean (mkt_cap))
+p ((mean (debt_lt + revenue)) / mean (mkt_cap))
+
+p scores

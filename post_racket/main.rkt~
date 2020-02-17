@@ -1,0 +1,8 @@
+#lang racket
+
+(require racket/gui/base)
+(require data-science)
+(require plot)
+
+(define data (read-csv "Documents/workspace/eso_langs/data/01-amazon.csv" #:->number? #t))
+(plot (points (map vector ($ data 'year) ($ data 'year))))

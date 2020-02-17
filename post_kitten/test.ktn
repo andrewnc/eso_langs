@@ -1,0 +1,11 @@
+define square (Int32 -> Int32):
+    dup (*)
+
+4 square
+say
+
+[1 2 3] {square} map
+
+show
+
+ToDo-make a print list function
