@@ -1,0 +1,56 @@
+{
+  "name": "ddtest",
+  "title": "ddtest",
+  "description": "The Application or The Library doing The Thing.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/andrewnc/eso_langs",
+  "author": {
+    "name": "andrewnc",
+    "email": "andrewcarr06@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/andrewnc/eso_langs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andrewnc/eso_langs/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/andrewnc/eso_langs/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "scripts": {
+    "reset": "npm run clean && npm run init",
+    "clean": "(rm -rf node_modules || rd /s/q node_modules)",
+    "init": "npm install && grunt default devel",
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "@ambers/contrib-jquery": "^0.6.0",
+    "@ambers/contrib-web": "^0.8.2",
+    "@ambers/domite": "^0.9.0",
+    "@ambers/lang": "^0.27.0",
+    "@ambers/silk": "^0.6.0",
+    "es6-promise": "^4.2.6"
+  },
+  "devDependencies": {
+    "@ambers/contrib-legacy": "^0.10.1",
+    "@ambers/helios": "^0.12.2",
+    "@ambers/ide-starter-modal": "^0.2.0",
+    "@ambers/sdk": "^0.12.1",
+    "grunt": "^1.0.3",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-requirejs": "^1.0.0",
+    "grunt-exec": "^3.0.0",
+    "requirejs": "^2.3.5"
+  },
+  "keywords": [
+    "Amber",
+    "Smalltalk"
+  ]
+}

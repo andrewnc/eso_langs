@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fitness Tracker</title>
+    <link rel="stylesheet"
+          href="chartist.min.css">
+<style>
+svg.ct-chart-bar, svg.ct-chart-line{
+    overflow: visible;
+}
+
+.ct-label.ct-label.ct-horizontal.ct-end {
+  position: relative;
+  justify-content: flex-end;
+  text-align: right;
+  transform-origin: 100% 0;
+  transform: translate(-100%) rotate(-45deg);
+  white-space:nowrap;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+ul.task-items li.item {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  margin: 20px 0;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+}
+ul.task-items li.item.type1 .task .icon {
+  background: #9575cd;
+}
+ul.task-items li.item.type2 .task .icon {
+  background: #f48fb1;
+}
+ul.task-items li.item.type3 .task .icon {
+  background: #9575cd;
+}
+ul.task-items li.item.type4 .task .icon {
+  background: #4FC3F7;
+}
+ul.task-items li.item .task {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  width: 240px;
+}
+ul.task-items li.item .task .icon {
+  background: #bdbdbd;
+  width: 50px;
+  height: 50px;
+  boder-radius: 5px;
+}
+ul.task-items li.item .task .name {
+  background: #eeeeee;
+  margin-left: 20px;
+  width: 180px;
+  height: 25px;
+  border-radius: 15px;
+}
+ul.task-items li.item .status {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  font-size: 1em;
+  color: #2e7d32;
+  width: 245px;
+  margin-left: 30px;
+}
+ul.task-items li.item .status .icon {
+  background: #2e7d32;
+  margin-right: 10px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+ul.task-items li.item .status .icon.risk {
+  background: red;
+}
+ul.task-items li.item .status .icon.warning {
+  background: #FFA000;
+}
+ul.task-items li.item .status .icon.off {
+  background: #BF360C;
+}
+ul.task-items li.item .progress {
+  width: 190px;
+}
+ul.task-items li.item .progress progress {
+  display: block;
+  margin-left: 0;
+  -webkit-appearance: none;
+  height: 12.5px;
+  width: 142.5px;
+}
+ul.task-items li.item .progress progress::-webkit-progress-bar {
+  background-color: #eeeeee;
+  border-radius: 5px;
+}
+ul.task-items li.item .progress ::-webkit-progress-value {
+  background-color: #4dd0e1;
+  border-radius: 5px;
+}
+ul.task-items li.item .dates {
+  width: 150px;
+}
+ul.task-items li.item .dates .bar,
+ul.task-items li.item .priority .bar {
+  background: #eeeeee;
+  width: 100px;
+  height: 25px;
+  border-radius: 15px;
+}
+ul.task-items li.item .priority {
+  width: 144.5px;
+}
+ul.task-items li.item .priority .bar {
+  background: #ffcdd2;
+}
+ul.task-items li.item .user {
+  width: 30px;
+}
+ul.task-items li.item .user img {
+  border-radius: 50%;
+}
+</style>
+  </head>
+  <body>
+      <h1>Andrew Carr Fitness Tracker</h1>
+    <!-- Site content goes here !-->
+    <div class="row">
+        <div class="column">
+            <h4>Minutes</h4>
+            <div class="ct-chart ct-perfect-fourth one"></div>
+        </div>
+        <div class="column">
+            <h4>Feelings</h4>
+            <div class="ct-chart ct-perfect-fourth two"></div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- List Items -->
+        <ul class="task-items">
+        </ul>
+    </div>
+    <script src="chartist.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.1.0/anime.min.js"></script>
+        <script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
+    <script>
+        var url = "https://andrewnc-fitness.builtwithdark.com/activity";
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function(fitnessData){
+		var noteTemplate = `<li class="item type1">
+
+			<div class="status">
+                {{notes}}
+			</div>
+
+			<div class="progress">
+                {{date}}
+			</div>
+
+			<div class="dates">
+				<div class="bar"> </div>
+			</div>
+
+		</li>`;
+                var minutes = [];
+                var feelings = [];
+                var notes = [];
+                var dates = [];
+                for(var i = 0; i < fitnessData.length; i++){
+                    var record = fitnessData[i];
+                    console.log(record.minutes);
+                    minutes.push(record.minutes);
+                    feelings.push(record.feeling);
+                    notes.push(noteTemplate.replace("{{notes}}", record.notes));
+                    dates.push(record.date);
+                }
+                var minutesData = {
+                    labels: dates,
+                    series: [minutes]
+                };
+                var feelingsData= {
+                    labels: dates,
+                    series: [feelings]
+                };
+            var options = {
+                width: 600,
+                height: 400
+            };
+            new Chartist.Line('.one', minutesData, options);
+            new Chartist.Line('.two', feelingsData, options);
+
+            for(var i = 0; i < notes.length; i++){
+                $(".task-items").prepend(notes[i].replace("{{date}}", dates[i]));
+            }
+
+            }
+        });
+
+
+            function rv(n,m){
+                return anime.random(n,m);
+            }
+        
+    function float(target){
+        return anime ({targets: target,
+            translateY: [
+                {value: rv(0,6), duration: rv(1000,2000)  },
+                {value: rv(-6,0), duration: rv(1000,2000) }
+            ],
+                loop: true,
+                direction: 'alternate',
+                easing: 'easeInOutQuad',
+                delay: rv(100, 200),
+                elasticity: 200
+            });
+        }
+    </script>
+    <script>
+    $(document).ready(function(){setTimeout(function(){
+            $(".ct-point").each(function(i, obj){float(obj).play()});
+    },2000);});
+    </script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/andrewcarr/Documents/workspace/eso_langs/post_fsharp/myFSharpApp/myFSharpApp.fsproj": {}
+  },
+  "projects": {
+    "/Users/andrewcarr/Documents/workspace/eso_langs/post_fsharp/myFSharpApp/myFSharpApp.fsproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/andrewcarr/Documents/workspace/eso_langs/post_fsharp/myFSharpApp/myFSharpApp.fsproj",
+        "projectName": "myFSharpApp",
+        "projectPath": "/Users/andrewcarr/Documents/workspace/eso_langs/post_fsharp/myFSharpApp/myFSharpApp.fsproj",
+        "packagesPath": "/Users/andrewcarr/.nuget/packages/",
+        "outputPath": "/Users/andrewcarr/Documents/workspace/eso_langs/post_fsharp/myFSharpApp/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/andrewcarr/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "FSharp.Core": {
+              "target": "Package",
+              "version": "[4.7.0, )",
+              "generatePathProperty": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.200/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

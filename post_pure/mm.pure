@@ -1,0 +1,33 @@
+
+// pretty print a dmatrix
+using system;
+__show__ x::matrix
+= strcat [printd j (x!(i,j))|i=0..n-1; j=0..m-1] + "\n"
+with printd 0 = sprintf "\n%10.5f"; printd _ = sprintf "%10.5f" end
+when n,m = dim x end if dmatrixp x;
+
+// matrix multiplication
+x::matrix * y::matrix = {dot u v | u = rows x; v = cols y} with
+  dot u v = foldl (+) 0 $ zipwith (*) u (rowvector v);
+end if m==n when _,m = dim x; n,_ = dim y end;
+
+eye n = dmatrix {i==j | i=1..n;j=1..n};
+rand_mat n = dmatrix {abs random mod 100 | i=1..n;j=1..n} / 100;
+
+using math;
+type scalar x = ~matrixp x;
+// basic matrix operations
+x::matrix / a::scalar = map (/a) x;
+x::matrix * a::scalar = map (*a) x;
+x::matrix + a::scalar = map (+a) x;
+x::matrix ^ a::scalar = loop a x with
+loop a x = loop (a-1) x*x if a >1;
+         = x otherwise;
+end;
+
+// non commutative probability operations
+sum = foldl (+) 0;
+tr x::matrix = sum $ diag x;
+fn_tr x::matrix = tr x / (dim x)!0;
+involution x::cmatrix = transpose $ map (conj) x;
+moment (x::matrix, n) = fn_tr $ x^n;

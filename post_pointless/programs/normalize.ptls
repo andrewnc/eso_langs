@@ -1,0 +1,39 @@
+import "chart.ptls" as chart
+
+a = [1, 2, 3, 4]
+b = [2, 4, 4, 4, 5, 5, 7, 9]
+c = for n in range(100) yield randFloat(1)
+d = [0.46049868, 0.7345469 , 0.48832378, 0.07221104, 0.10569283, 0.59972103, 0.45906603, 0.0534899]
+mean(li) = 
+    reduceFirst(add, li) / length(li)
+
+std(li) = 
+    map(sub(mean(li)), li)
+    |> map(pow(2))
+    |> mean
+    |> pow(0.5)
+
+normalizeStdScore(li) = 
+    map(sub(mu), li) |> map(mul((-1))) |> map(div(std(li)))
+    where {mu = mean(li)}
+
+minMaxFeatureScaling(li) =
+    map(sub(minVal), li) |> map(mul((-1))) |> map(div(maxVal - minVal))
+    where {
+        minVal = minimum(li)
+        maxVal = maximum(li)
+    }
+
+quantileNormalization(li1, li2) =
+    for n in range(length(li1))
+        yield (at(n, s1) - at(n, s2) / 2)
+    where {
+        s1 = sort(li1)
+        s2 = sort(li2)
+    }
+output = 
+    minMaxFeatureScaling(a)
+    -- normalizeStdScore(a)
+    -- quantileNormalization([1, 2, 3], [4, 4, 4])
+    -- |> chart.scale(8)
+    |> println

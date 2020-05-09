@@ -1,0 +1,7 @@
+import "chart.ptls" as chart
+
+li = for n in rangeStep(-10, 10, 1) yield n**2
+output =
+  li
+  |> chart.scale(8)
+  |> println

@@ -1,0 +1,10 @@
+#Dependencies defined in `package.json` got via `npm install`
+/node_modules/
+
+#Generated when running tests from cli via `npm test` / `grunt test`
+/test_runner.js
+
+#Generated when `grunt devel`, `grunt deploy` or `grunt deploy:lambda`
+/config.js
+/the.js
+/lambda/the.js

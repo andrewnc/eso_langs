@@ -1,0 +1,5 @@
+https://www.macports.org/ports.php?by=category&substr=pure
+eye n = {i==j | i = 1..n; j = 1..n};
+x::matrix * y::matrix = {dot u v | u = rows x; v = cols y} with
+  dot u v = foldl (+) 0 $ zipwith (*) u (rowvector v);
+end if m==n when _,m = dim x; n,_ = dim y end;

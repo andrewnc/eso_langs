@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Gk0RERRzLZzbtoepy/upKZNYip0gWubosGQqCtdzQWMJKEBeJrm8q3mtAXUazKQfiS0zAEq45m68P+hahcfjFQ==",
+  "success": true,
+  "projectFilePath": "/Users/andrewcarr/Documents/workspace/eso_langs/post_fsharp/myFSharpApp/myFSharpApp.fsproj",
+  "expectedPackageFiles": [
+    "/Users/andrewcarr/.nuget/packages/fsharp.core/4.7.0/fsharp.core.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

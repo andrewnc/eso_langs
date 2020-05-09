@@ -1,0 +1,10 @@
+isEven(n) = n % 2 == 0
+
+-- used to determine how many of the digits of pi are even
+output = 
+    readLines 
+    |> map(toFloat) 
+    |> map(isEven) 
+    |> map(toInt) 
+    |> reduceFirst(add) 
+    |> println
